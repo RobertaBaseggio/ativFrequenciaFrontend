@@ -1,15 +1,32 @@
 import React, { useState, useEffect, FormEvent } from 'react';
-import { Lista } from './styles';
+import { Botoes, Lista } from './styles';
 import Checkbox from '@mui/material/Checkbox';
 import Header from '../../conponents/Header'
+import api from '../../services/api';
+import { BsPlusCircle } from 'react-icons/bs';
 
-interface Repositorio {
-
+interface Aluno {
+  id: number,
+  nome: string
 }
 
-const ListaAlunos: React.FC = () => {
+const ListaAlunos: React.FC<Aluno> = ({id, nome}) => {
   
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+  const [aluno, setAluno] = useState<Aluno[]>([]);
+  const [checked, setChecked] = React.useState([true, false]);
+
+  const handleChange = () => {
+    setChecked([false]);
+  };
+
+  useEffect(() => {
+    api.get(`/aluno/`).then((response) => {
+      setAluno(response.data)
+    })
+
+  }, [id]);
+
   return (
     <>
       <Header/>
@@ -39,30 +56,47 @@ const ListaAlunos: React.FC = () => {
               </tr>
             </thead>
             <tbody>
+                { aluno.map(aluno => (
                 <tr>
+                  <td>
+                    {aluno.id}
+                  </td>
+                  <td>
+                    {aluno.nome}
+                  </td>
                 <td>
-                  1
+                <Checkbox />
                 </td>
                 <td>
-                  Roberta
+                <Checkbox />
                 </td>
                 <td>
-                <Checkbox {...label} />
+                <Checkbox />
                 </td>
                 <td>
-                <Checkbox {...label} />
-                </td>
-                <td>
-                <Checkbox {...label} />
-                </td>
-                <td>
-                <Checkbox {...label} />
+                <Checkbox />
                 </td>
               </tr>
+              ))}
             </tbody>
           </table>
+          <tr>
+            <a href="http://localhost:3000/cadastro">
+              <BsPlusCircle size={25} id='mais'/>
+            </a>
+          </tr>
         </div>
       </Lista>
+      <Botoes>
+        <div>
+          <button onClick={handleChange} >
+            Limpar
+          </button>   
+          <button>
+            Salvar
+          </button>
+        </div>
+      </Botoes>
     </>
   )
 };
