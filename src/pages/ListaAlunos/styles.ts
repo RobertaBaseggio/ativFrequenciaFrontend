@@ -9,6 +9,11 @@ export const Lista = styled.div`
       width: 60%;
       border-collapse: collapse;
 
+      a{
+        color: black;
+        text-decoration: none;
+      }
+      
       thead{
 
         td{

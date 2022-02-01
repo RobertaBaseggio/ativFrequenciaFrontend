@@ -11,24 +11,19 @@ interface Aluno {
 }
 
 const ListaAlunos: React.FC<Aluno> = ({id, nome}) => {
-  
-  const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-  const [aluno, setAluno] = useState<Aluno[]>([]);
-  const [checked, setChecked] = React.useState([true, false]);
 
-  const handleChange = () => {
-    setChecked([false]);
-  };
+  const [aluno, setAluno] = useState<Aluno[]>([]);
+
 
   useEffect(() => {
     api.get(`/aluno/`).then((response) => {
       setAluno(response.data)
     })
 
-  }, [id]);
+  }, [id, nome]);
 
   return (
-    <>
+    <>  
       <Header/>
       <Lista>
         <div>
@@ -56,25 +51,29 @@ const ListaAlunos: React.FC<Aluno> = ({id, nome}) => {
               </tr>
             </thead>
             <tbody>
-                { aluno.map(aluno => (
-                <tr>
-                  <td>
+              { aluno.map(aluno => (
+              <tr>
+                <td>
+                  <a href="http://localhost:3000/edicao">
                     {aluno.id}
-                  </td>
-                  <td>
+                  </a>
+                </td>
+                <td>
+                  <a href="http://localhost:3000/edicao">
                     {aluno.nome}
-                  </td>
-                <td>
-                <Checkbox />
+                  </a>
                 </td>
                 <td>
-                <Checkbox />
+                  <Checkbox id="i"/>
                 </td>
                 <td>
-                <Checkbox />
+                  <Checkbox id="i"/>
                 </td>
                 <td>
-                <Checkbox />
+                  <Checkbox id="i"/>
+                </td>
+                <td>
+                  <Checkbox id="i"/>
                 </td>
               </tr>
               ))}
@@ -89,7 +88,7 @@ const ListaAlunos: React.FC<Aluno> = ({id, nome}) => {
       </Lista>
       <Botoes>
         <div>
-          <button onClick={handleChange} >
+          <button>
             Limpar
           </button>   
           <button>

@@ -1,15 +1,15 @@
 import styled, { css } from 'styled-components';
+import { Form } from '@unform/web';
 
-
-export const Cadastro = styled.div`
+export const Cadastro = styled(Form)`
 
   height: 100%;
   margin: 20vh 0 0 20vw;
   width: 65%;
-  background-color: blanchedalmond;
 
     p{
       font-size: 25px;
+      margin-left: 20px;
     }
 
     input{
@@ -22,7 +22,7 @@ export const Cadastro = styled.div`
     }
 
     #data{
-      width: 125px;
+      width: 127px;
     }
 
     #telefone{
@@ -51,8 +51,9 @@ export const Cadastro = styled.div`
       background-color: yellowgreen;
       border-radius: 10px;
       margin-top: 10px;
-      margin-right: 20px;
+      margin-left: 45vw;
       cursor: pointer;
     }
+
 
 `;

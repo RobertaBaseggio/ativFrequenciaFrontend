@@ -8,7 +8,9 @@ const Header: React.FC = () => {
   return (
     <>
       <Container>
-        <GoBook size={35} id='img'/> 
+        <a href="http://localhost:3000/">
+          <GoBook size={35} id='img'/> 
+        </a>
         <div id="sair">
         <div >
           <FcSettings />
