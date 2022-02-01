@@ -2,18 +2,14 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Header from '../../conponents/Header';
 import api from '../../services/api';
 import { Edicao,Botoes } from './styles';
-import { useRouteMatch } from "react-router-dom"
+import { useRouteMatch } from "react-router-dom";
 
-interface Aluno {
-  id: number,
-  nome: string
-}
+
 interface AlunoParams{
   id: string,
   nome:string
 }
-const ListaAlunos: React.FC<Aluno> = () => {
-  const [alunos, setAluno] = useState<Aluno>(); 
+const ListaAlunos: React.FC = () => {
   const { params } = useRouteMatch<AlunoParams>();
   const teste = {
     nome: ""
@@ -22,10 +18,12 @@ const ListaAlunos: React.FC<Aluno> = () => {
   const deletar = useCallback(()=>{
         api.delete(`aluno/delete/${params.id}`);
   },[])
+
   const editar = useCallback(()=>{
     teste.nome = "Maria"
     api.put(`aluno/editar/${params.id}`,teste);
-},[])
+  },[])
+
   return (
     <>
       <Header/>

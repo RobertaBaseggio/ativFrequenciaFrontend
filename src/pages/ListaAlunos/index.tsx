@@ -5,6 +5,8 @@ import Header from '../../conponents/Header'
 import api from '../../services/api';
 import { BsPlusCircle } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+import Box from '@mui/material/Box';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 interface Aluno {
   id: number,
@@ -78,7 +80,7 @@ const ListaAlunos: React.FC<Aluno> = ({id, nome}) => {
                   </Link>
                 </td>
                 <td>
-                  <Checkbox id="i" onClick={() => selecionarPresenca(1)}/>
+                  <Checkbox name="marcar" onClick={() => selecionarPresenca(1)}/>
                 </td>
                 <td>
                   <Checkbox id="i" onClick={() => selecionarPresenca(1)}/>
