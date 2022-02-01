@@ -9,7 +9,7 @@ const Routes: React.FC = () => (
   <Switch>
     <Route path="/" exact component={ListaAlunos} />;
     <Route path="/cadastro" exact component={CadastraAluno} />;
-    <Route path="/edicao" exact component={EditaAluno} />;
+    <Route path="/edicao/:id+" exact component={EditaAluno} />;
   </Switch>
 );
  

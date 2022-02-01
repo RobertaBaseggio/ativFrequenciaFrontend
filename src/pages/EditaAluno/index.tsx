@@ -1,46 +1,42 @@
-import { FormHandles } from '@unform/core';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Header from '../../conponents/Header';
-import desmarcarTodos from '../../js/desmarcar';
 import api from '../../services/api';
 import { Edicao,Botoes } from './styles';
+import { useRouteMatch } from "react-router-dom"
 
 interface Aluno {
   id: number,
   nome: string
 }
+interface AlunoParams{
+  id: string,
+  nome:string
+}
+const ListaAlunos: React.FC<Aluno> = () => {
+  const [alunos, setAluno] = useState<Aluno>(); 
+  const { params } = useRouteMatch<AlunoParams>();
+  const teste = {
+    nome: ""
+  }
 
-const ListaAlunos: React.FC<Aluno> = ({id, nome}) => {
-
-  const [alunos, setAluno] = useState<Aluno>();
-
-  useEffect(() => {
-    api.get(`/aluno/${id}`).then((response) => {
-      setAluno(response.data)
-    })
-  }, [alunos, setAluno, id, nome]);
-
-  const FormRef = useRef<FormHandles> (null);
-  const handleSubmit = useCallback(()=>{
-        api.delete(`aluno/${id}`);
-        window.document.location.reload()
+  const deletar = useCallback(()=>{
+        api.delete(`aluno/delete/${params.id}`);
   },[])
-  
+  const editar = useCallback(()=>{
+    teste.nome = "Maria"
+    api.put(`aluno/editar/${params.id}`,teste);
+},[])
   return (
     <>
       <Header/>
-      <Edicao onSubmit={handleSubmit} ref={FormRef}>
+      <Edicao onSubmit={editar}>
         <p>
           Editar
         </p>
         <label >
           Nome:
         </label>
-        <input type="text">
-          { alunos && 
-            alunos.nome
-          }  
-        </input> 
+        <input type="text"/> 
         <label >
           Data de nascimento:
         </label>
@@ -69,14 +65,13 @@ const ListaAlunos: React.FC<Aluno> = ({id, nome}) => {
           Pai:
         </label>
         <input type="text" />
-        
-      </Edicao>
-      <Botoes>
-        <button type='submit' onClick={desmarcarTodos}>
-          Deletar
-        </button>
-        <button>
+        <button type='submit'>
           Salvar
+        </button>
+      </Edicao>
+      <Botoes onSubmit={deletar}>
+        <button type='submit'>
+          Deletar
         </button>
       </Botoes>
     </>

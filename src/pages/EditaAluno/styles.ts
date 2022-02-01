@@ -44,14 +44,6 @@ export const Edicao = styled(Form)`
       margin: 2px;
     }
 
-`;
-
-
-export const Botoes = styled.div`
-
-  margin-left: 22vw;
-  width: 50%;
-
     button{
       width: 85px;
       height: 25px;
@@ -60,12 +52,29 @@ export const Botoes = styled.div`
       border-radius: 10px;
       margin-top: 10px;
       margin-right: 20px;
+      margin-left: 45vw;
       cursor: pointer;
     }
 
-    button:nth-child(1){
+`;
+
+
+export const Botoes = styled(Form)`
+
+  margin-left: 22vw;
+  width: 50%;
+
+    button{
+      width: 85px;
+      height: 25px;
+      border: none;
       background-color: #c2c2c2;
-      margin-left: 34vw;
+      border-radius: 10px;
+      position: absolute;
+      top: 75vh;
+      left: 57vw;
+      cursor: pointer;
     }
+
 
 `;
