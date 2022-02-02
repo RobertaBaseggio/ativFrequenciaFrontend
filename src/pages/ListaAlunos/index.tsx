@@ -5,8 +5,7 @@ import Header from '../../conponents/Header'
 import api from '../../services/api';
 import { BsPlusCircle } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import Desmarcar from '../../js/desmarcar';
 
 interface Aluno {
   id: number,
@@ -28,8 +27,7 @@ const ListaAlunos: React.FC<Aluno> = ({id, nome}) => {
     if(frequencia.find(frequencia => frequencia)){
 
     }
-
-    console.log(frequencia)
+    
   }, [])
   useEffect(() => {
     api.get(`/aluno/`).then((response) => {
@@ -83,31 +81,31 @@ const ListaAlunos: React.FC<Aluno> = ({id, nome}) => {
                   <Checkbox name="marcar" onClick={() => selecionarPresenca(1)}/>
                 </td>
                 <td>
-                  <Checkbox id="i" onClick={() => selecionarPresenca(1)}/>
+                  <Checkbox name="marcar" onClick={() => selecionarPresenca(1)}/>
                 </td>
                 <td>
-                  <Checkbox id="i" onClick={() => selecionarPresenca(1)}/>
+                  <Checkbox name="marcar" onClick={() => selecionarPresenca(1)}/>
                 </td>
                 <td>
-                  <Checkbox id="i" onClick={() => selecionarPresenca(1)}/>
+                  <Checkbox name="marcar" onClick={() => selecionarPresenca(1)}/>
                 </td>
               </tr>
               ))}
             </tbody>
           </table>
           <tr>
-            <a href="http://localhost:3000/cadastro">
+            <Link to={`/cadastro/`}>
               <BsPlusCircle size={25} id='mais'/>
-            </a>
+            </Link>
           </tr>
         </div>
       </Lista>
       <Botoes>
         <div>
-          <button>
+          <button onClick={Desmarcar}>
             Limpar
           </button>   
-          <button>
+          <button type='submit'>
             Salvar
           </button>
         </div>

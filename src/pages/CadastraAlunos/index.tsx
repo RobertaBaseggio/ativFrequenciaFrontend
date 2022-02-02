@@ -11,6 +11,7 @@ const ListaAlunos: React.FC = () => {
     nome: ""
   }
   const FormRef = useRef<FormHandles> (null);
+  
   const handleSubmit = useCallback(()=>{
     AlunoModel.nome = (document.getElementById('nome') as HTMLInputElement).value;
         api.post('aluno/cadastro',AlunoModel);

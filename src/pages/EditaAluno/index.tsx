@@ -9,6 +9,7 @@ interface AlunoParams{
   id: string,
   nome:string
 }
+
 const ListaAlunos: React.FC = () => {
   const { params } = useRouteMatch<AlunoParams>();
   const teste = {
@@ -20,8 +21,9 @@ const ListaAlunos: React.FC = () => {
   },[])
 
   const editar = useCallback(()=>{
-    teste.nome = "Maria"
+    teste.nome = (document.getElementById('nome') as HTMLInputElement).value;
     api.put(`aluno/editar/${params.id}`,teste);
+    window.document.location.reload()
   },[])
 
   return (
@@ -34,7 +36,7 @@ const ListaAlunos: React.FC = () => {
         <label >
           Nome:
         </label>
-        <input type="text"/> 
+        <input type="text" id='nome'/> 
         <label >
           Data de nascimento:
         </label>
