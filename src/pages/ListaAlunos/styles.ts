@@ -60,12 +60,8 @@ export const Botoes = styled.div`
       border-radius: 10px;
       margin-top: 10px;
       margin-right: 20px;
+      margin-left: 40vw;
       cursor: pointer;
-    }
-
-    button:nth-child(1){
-      background-color: #c2c2c2;
-      margin-left: 32vw;
     }
 
 `;

@@ -1,40 +1,134 @@
-import React, { useState, useEffect, FormEvent, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Botoes, Lista } from './styles';
 import Checkbox from '@mui/material/Checkbox';
 import Header from '../../conponents/Header'
 import api from '../../services/api';
 import { BsPlusCircle } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
-import Desmarcar from '../../js/desmarcar';
 
 interface Aluno {
-  id: number,
+  idAluno: number,
   nome: string
 }
 
 interface Frequencia {
-  presenca: number
+  idAluno: number 
+  horario: number | undefined,
+  frequencia: boolean
 }
 
-const ListaAlunos: React.FC<Aluno> = ({id, nome}) => {
+interface Chamada {
+  idAluno: number,
+  aula: number
+}
 
-  const [aluno, setAluno] = useState<Aluno[]>([]);
-  const [frequencia, setFrequencia] = useState<Frequencia[]>([]);
 
-  const selecionarPresenca = useCallback ((presenca:number) => {
-    frequencia.push({presenca:presenca})
+const ListaAlunos: React.FC<Aluno> = ({idAluno, nome}) => {
 
-    if(frequencia.find(frequencia => frequencia)){
+  const [alunos, setAluno] = useState<Aluno[]>([]);
+  const [alunoPresente1 , setAlunoPresente1] = useState<Chamada[]>([]);
+  const [alunoPresente2, setAlunoPresente2] = useState<Chamada[]>([]);
+  const [alunoPresente3, setAlunoPresente3] = useState<Chamada[]>([]);
+  const [alunoPresente4, setAlunoPresente4] = useState<Chamada[]>([]);
+
+  const [frequencias, setFrequencia] = useState<Frequencia[]>([]);
+
+  const MarcaBox = useCallback  ((id: number, aula: number) => {
+
+    switch(aula){
+      case 1: 
+        if(alunoPresente1.find(frequencia => frequencia.idAluno === id)){
+        setAlunoPresente1(alunoPresente1.filter(frequencia => frequencia.idAluno !== id))     
+      } else{
+        alunoPresente1.push({idAluno: id, aula: aula})
+        setAlunoPresente1(alunoPresente1);
+      }
+      break;
+
+      case 2: 
+        if(alunoPresente2.find(frequencia => frequencia.idAluno === id)){
+        setAlunoPresente2(alunoPresente2.filter(frequencia => frequencia.idAluno !== id))     
+      } else{
+        alunoPresente2.push({idAluno: id, aula: aula})
+        setAlunoPresente2(alunoPresente2);
+      }
+      break;
+
+      case 3: 
+        if(alunoPresente3.find(frequencia => frequencia.idAluno === id)){
+        setAlunoPresente3(alunoPresente3.filter(frequencia => frequencia.idAluno !== id))     
+      } else{
+        alunoPresente3.push({idAluno: id, aula: aula})
+        setAlunoPresente3(alunoPresente3);
+      }
+      break;
+
+      case 4: 
+        if(alunoPresente4.find(frequencia => frequencia.idAluno === id)){
+        setAlunoPresente4(alunoPresente4.filter(frequencia => frequencia.idAluno !== id))     
+      } else{
+        alunoPresente4.push({idAluno: id, aula: aula})
+        setAlunoPresente4(alunoPresente4);
+      }
+      break;
 
     }
     
-  }, [])
+  }, [alunoPresente1,alunoPresente2,alunoPresente3,alunoPresente4])
+
+
+   const salvarPresencas = useCallback (() => {
+     alunos.map(aluno => {
+       
+       if(alunoPresente1.find(aluno2 => aluno2.idAluno === aluno.idAluno)){
+        let estudantePresente =  alunoPresente1.find(estudante => estudante.idAluno === aluno.idAluno)?.aula;
+        frequencias.push({idAluno: aluno.idAluno ,horario: estudantePresente ,frequencia: true});
+       }else{
+        frequencias.push({idAluno: aluno.idAluno ,horario: 0 ,frequencia: false});
+       }
+      })
+
+      alunos.map(aluno => {
+       
+        if(alunoPresente2.find(aluno2 => aluno2.idAluno === aluno.idAluno)){
+         let estudantePresente =  alunoPresente2.find(estudante => estudante.idAluno === aluno.idAluno)?.aula;
+         frequencias.push({idAluno: aluno.idAluno ,horario: estudantePresente ,frequencia: true});
+        }else{
+         frequencias.push({idAluno: aluno.idAluno ,horario: 0 ,frequencia: false});
+        }
+       })
+
+       alunos.map(aluno => {
+       
+        if(alunoPresente3.find(aluno2 => aluno2.idAluno === aluno.idAluno)){
+         let estudantePresente =  alunoPresente3.find(estudante => estudante.idAluno === aluno.idAluno)?.aula;
+         frequencias.push({idAluno: aluno.idAluno ,horario: estudantePresente ,frequencia: true});
+        }else{
+         frequencias.push({idAluno: aluno.idAluno ,horario: 0 ,frequencia: false});
+        }
+       })
+
+       alunos.map(aluno => {
+       
+        if(alunoPresente4.find(aluno2 => aluno2.idAluno === aluno.idAluno)){
+         let estudantePresente =  alunoPresente4.find(estudante => estudante.idAluno === aluno.idAluno)?.aula;
+         frequencias.push({idAluno: aluno.idAluno ,horario: estudantePresente ,frequencia: true});
+        }else{
+         frequencias.push({idAluno: aluno.idAluno ,horario: 0 ,frequencia: false});
+        }
+       })
+
+    api.post(`/frequencia/cadastro`, frequencias);
+    window.document.location.reload()
+    
+  }, [frequencias, alunos])
+
   useEffect(() => {
     api.get(`/aluno/`).then((response) => {
       setAluno(response.data)
     })
 
-  }, [id, nome]);
+  }, [idAluno, nome]);
 
   return (
     <>  
@@ -65,29 +159,29 @@ const ListaAlunos: React.FC<Aluno> = ({id, nome}) => {
               </tr>
             </thead>
             <tbody>
-              { aluno.map(aluno => (
+              { alunos.map(aluno => (
               <tr>
                 <td>
-                  <Link to={`/edicao/${aluno.id}`}>
-                    {aluno.id}
+                  <Link to={`/edicao/${aluno.idAluno}`}>
+                    {aluno.idAluno}
                   </Link>
-                </td>
+                </td> 
                 <td>
-                <Link to={`/edicao/${aluno.id}`}>
+                <Link to={`/edicao/${aluno.idAluno}`}>
                     {aluno.nome}
                   </Link>
                 </td>
                 <td>
-                  <Checkbox name="marcar" onClick={() => selecionarPresenca(1)}/>
+                  <Checkbox name="marcar" onClick={() => MarcaBox(aluno.idAluno, 1 )}/>
                 </td>
                 <td>
-                  <Checkbox name="marcar" onClick={() => selecionarPresenca(1)}/>
+                  <Checkbox name="marcar" onClick={() => MarcaBox(aluno.idAluno, 2)}/>
                 </td>
                 <td>
-                  <Checkbox name="marcar" onClick={() => selecionarPresenca(1)}/>
+                  <Checkbox name="marcar" onClick={() => MarcaBox(aluno.idAluno, 3)}/>
                 </td>
                 <td>
-                  <Checkbox name="marcar" onClick={() => selecionarPresenca(1)}/>
+                  <Checkbox name="marcar" onClick={() => MarcaBox(aluno.idAluno, 4)}/>
                 </td>
               </tr>
               ))}
@@ -101,11 +195,8 @@ const ListaAlunos: React.FC<Aluno> = ({id, nome}) => {
         </div>
       </Lista>
       <Botoes>
-        <div>
-          <button onClick={Desmarcar}>
-            Limpar
-          </button>   
-          <button type='submit'>
+        <div>  
+          <button onClick={salvarPresencas}>
             Salvar
           </button>
         </div>
