@@ -3,6 +3,8 @@ import Header from '../../conponents/Header';
 import api from '../../services/api';
 import { Edicao,Botoes } from './styles';
 import { useRouteMatch } from "react-router-dom";
+import Notificacoes from '../../conponents/Notification';
+import { MdOutlineDone } from 'react-icons/md';
 
 
 interface AlunoParams{
@@ -74,6 +76,12 @@ const ListaAlunos: React.FC = () => {
           Deletar
         </button>
       </Botoes>
+      <Notificacoes >
+        <MdOutlineDone size={25}/>
+        <p>
+          Edição realizada
+        </p>
+      </Notificacoes>
     </>
   )
 };

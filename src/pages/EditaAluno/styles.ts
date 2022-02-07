@@ -5,7 +5,7 @@ export const Edicao = styled(Form)`
 
   height: 100%;
   margin: 20vh 0 0 20vw;
-  width: 65%;
+  width: 63%;
 
     p{
       font-size: 25px;
@@ -45,15 +45,16 @@ export const Edicao = styled(Form)`
     }
 
     button{
-      width: 85px;
-      height: 25px;
+      width: 90px;
+      height: 35px;
       border: none;
       background-color: yellowgreen;
       border-radius: 10px;
       margin-top: 10px;
+      margin-left: 44vw;
       margin-right: 20px;
-      margin-left: 45vw;
       cursor: pointer;
+      font-size: 16px;
     }
 
 `;
@@ -65,15 +66,16 @@ export const Botoes = styled(Form)`
   width: 50%;
 
     button{
-      width: 85px;
-      height: 25px;
+      width: 90px;
+      height: 35px;
       border: none;
       background-color: #c2c2c2;
       border-radius: 10px;
       position: absolute;
-      top: 75vh;
-      left: 57vw;
+      top: 69.5vh;
+      left: 56vw;
       cursor: pointer;
+      font-size: 16px;
     }
 
 

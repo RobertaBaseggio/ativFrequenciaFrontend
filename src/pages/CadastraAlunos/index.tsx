@@ -3,6 +3,8 @@ import { Cadastro } from './styles';
 import Header from '../../conponents/Header';
 import {FormHandles} from '@unform/core';
 import api from '../../services/api';
+import Notificacoes from '../../conponents/Notification';
+import { MdOutlineDone } from 'react-icons/md';
 
 
 const ListaAlunos: React.FC = () => {
@@ -61,6 +63,12 @@ const ListaAlunos: React.FC = () => {
           Cadastrar
         </button>
       </Cadastro>
+      <Notificacoes >
+        <MdOutlineDone size={25}/>
+        <p>
+          Aluno cadastrado
+        </p>
+      </Notificacoes>
     </>
   )
 };

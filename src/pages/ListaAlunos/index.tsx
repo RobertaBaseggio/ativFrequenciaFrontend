@@ -1,10 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Botoes, Lista } from './styles';
+import { Botoes, Lista} from './styles';
 import Checkbox from '@mui/material/Checkbox';
 import Header from '../../conponents/Header'
 import api from '../../services/api';
 import { BsPlusCircle } from 'react-icons/bs';
+import { FiEdit } from 'react-icons/fi';
+import { MdOutlineDone } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import Notificacoes from '../../conponents/Notification';
+import { toast, ToastContainer } from 'react-toastify';
+
 
 interface Aluno {
   idAluno: number,
@@ -30,7 +35,6 @@ const ListaAlunos: React.FC<Aluno> = ({idAluno, nome}) => {
   const [alunoPresente2, setAlunoPresente2] = useState<Chamada[]>([]);
   const [alunoPresente3, setAlunoPresente3] = useState<Chamada[]>([]);
   const [alunoPresente4, setAlunoPresente4] = useState<Chamada[]>([]);
-
   const [frequencias, setFrequencia] = useState<Frequencia[]>([]);
 
   const MarcaBox = useCallback  ((id: number, aula: number) => {
@@ -169,6 +173,7 @@ const ListaAlunos: React.FC<Aluno> = ({idAluno, nome}) => {
                 <td>
                 <Link to={`/edicao/${aluno.idAluno}`}>
                     {aluno.nome}
+                    <FiEdit/>
                   </Link>
                 </td>
                 <td>
@@ -187,11 +192,9 @@ const ListaAlunos: React.FC<Aluno> = ({idAluno, nome}) => {
               ))}
             </tbody>
           </table>
-          <tr>
-            <Link to={`/cadastro/`}>
-              <BsPlusCircle size={25} id='mais'/>
-            </Link>
-          </tr>
+          <Link to={`/cadastro/`}>
+            <BsPlusCircle size={25} id='mais'/>
+          </Link>
         </div>
       </Lista>
       <Botoes>
@@ -199,8 +202,15 @@ const ListaAlunos: React.FC<Aluno> = ({idAluno, nome}) => {
           <button onClick={salvarPresencas}>
             Salvar
           </button>
+          <ToastContainer />
         </div>
       </Botoes>
+      <Notificacoes >
+        <MdOutlineDone size={25}/>
+        <p>
+          Chamada salva
+        </p>
+      </Notificacoes>
     </>
   )
 };

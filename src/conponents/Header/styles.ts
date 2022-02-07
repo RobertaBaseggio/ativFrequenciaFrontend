@@ -14,7 +14,7 @@ export const Container = styled.div`
   border-bottom: 2px solid yellowgreen;  
 
     #img{
-      margin: 20px 0 0 20px;
+      margin: 15px 0 0 20px;
       color: black;
     }
 
@@ -31,7 +31,7 @@ export const Container = styled.div`
         height: 3vh;
         width: 1.5vw;
         cursor: pointer;
-        margin-right: 10px;
+        margin:12px 7px 0 0;
       }
 
       p {

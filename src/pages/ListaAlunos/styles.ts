@@ -3,10 +3,10 @@ import styled, { css } from 'styled-components';
 export const Lista = styled.div`
 
     height: 100%;
-    margin: 20vh 0 0 22vw;
+    margin: 20vh 0 0 17vw;
 
     table{
-      width: 60%;
+      width: 80%;
       border-collapse: collapse;
 
       a{
@@ -15,10 +15,11 @@ export const Lista = styled.div`
       }
       
       thead{
-
         td{
-          border: 1px solid #c2c2c2;
+          border: 1px solid yellowgreen;
           text-align: center;
+          height: 40px;
+          background: rgba(60, 80, 20, 0.1);
         }
       }
       tbody{
@@ -36,32 +37,37 @@ export const Lista = styled.div`
           border: 1px solid #c2c2c2;
           text-align: start;
           padding-left: 10px;
+
+          svg{
+            float: right;
+            margin-right: 20px;
+            color: #454343;
+          }
         }
       }
     }
 
     #mais{
-      margin: 15px 0 0 21vw;
-      color: black;
+      margin: 15px 0 0 32vw;
+      color: #454343;
     }
 `;
-
 
 export const Botoes = styled.div`
 
-  margin-left: 22vw;
   width: 50%;
+  float: right;
 
     button{
-      width: 85px;
-      height: 25px;
+      width: 90px;
+      height: 35px;
       border: none;
       background-color: yellowgreen;
       border-radius: 10px;
-      margin-top: 10px;
-      margin-right: 20px;
-      margin-left: 40vw;
+      margin: 10px 20px 0 27vw;
       cursor: pointer;
+      font-size: 16px;
     }
 
 `;
+

@@ -5,7 +5,7 @@ export const Cadastro = styled(Form)`
 
   height: 100%;
   margin: 20vh 0 0 20vw;
-  width: 65%;
+  width: 63%;
 
     p{
       font-size: 25px;
@@ -45,15 +45,14 @@ export const Cadastro = styled(Form)`
     }
 
     button{
-      width: 85px;
-      height: 25px;
+      width: 90px;
+      height: 35px;
       border: none;
       background-color: yellowgreen;
       border-radius: 10px;
       margin-top: 10px;
-      margin-left: 45vw;
+      margin-left: 44vw;
       cursor: pointer;
+      font-size: 16px;
     }
-
-
 `;
