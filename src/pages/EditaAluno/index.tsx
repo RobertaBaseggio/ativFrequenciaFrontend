@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Header from '../../conponents/Header';
 import api from '../../services/api';
 import { Edicao,Botoes } from './styles';
-import { useRouteMatch } from "react-router-dom";
+import { useHistory, useRouteMatch } from "react-router-dom";
 
 
 interface AlunoParams{
@@ -16,8 +16,8 @@ interface Aluno{
 
 const ListaAlunos: React.FC = () => {
 
-  const [alunoNome, setNome] = useState("");
   const { params } = useRouteMatch<AlunoParams>();
+  const history = useHistory();
 
   const [aluno, setAluno] = useState<Aluno>();
 
@@ -32,16 +32,13 @@ const ListaAlunos: React.FC = () => {
   }, []);
 
   const deletar = useCallback(()=>{
-        api.delete(`aluno/delete/${params.id}`);
+        api.delete(`aluno/delete/${params.id}`).then((response) => {history.push('/')});
 
-        window.location.reload()
   },[])
 
   const editar = useCallback(()=>{
     teste.nome = (document.getElementById('nome') as HTMLInputElement).value;
-    api.put(`aluno/editar/${params.id}`,teste);
-
-    window.location.reload()
+    api.put(`aluno/editar/${params.id}`,teste).then((response) => {history.push('/')});
 
   },[])
 
