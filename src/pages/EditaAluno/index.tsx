@@ -3,7 +3,6 @@ import Header from '../../conponents/Header';
 import api from '../../services/api';
 import { Edicao,Botoes } from './styles';
 import { useRouteMatch } from "react-router-dom";
-import { toast, ToastContainer } from 'react-toastify';
 
 
 interface AlunoParams{
@@ -35,30 +34,14 @@ const ListaAlunos: React.FC = () => {
   const deletar = useCallback(()=>{
         api.delete(`aluno/delete/${params.id}`);
 
-        toast.success("Aluno deletado", {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        window.location.reload()
   },[])
 
   const editar = useCallback(()=>{
     teste.nome = (document.getElementById('nome') as HTMLInputElement).value;
     api.put(`aluno/editar/${params.id}`,teste);
 
-    toast.success("Aluno editado", {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
+    window.location.reload()
 
   },[])
 
@@ -113,7 +96,6 @@ const ListaAlunos: React.FC = () => {
           Deletar
         </button>
       </Botoes>
-      <ToastContainer />
     </>
   )
 };

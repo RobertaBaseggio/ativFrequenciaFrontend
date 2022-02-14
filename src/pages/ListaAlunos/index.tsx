@@ -6,9 +6,7 @@ import api from '../../services/api';
 import { BsPlusCircle } from 'react-icons/bs';
 import { FiEdit } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 
 interface Aluno {
   idAluno: number,
@@ -123,16 +121,7 @@ const ListaAlunos: React.FC<Aluno> = ({idAluno, nome}) => {
 
     api.post(`/frequencia/cadastro`, frequencias);
    
-    toast.success("Chamada salva", {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-    
+    window.location.reload()
     
   }, [frequencias, alunos])
 
@@ -214,7 +203,6 @@ const ListaAlunos: React.FC<Aluno> = ({idAluno, nome}) => {
          
         </div>
       </Botoes>
-       <ToastContainer />
     </>
   )
 };

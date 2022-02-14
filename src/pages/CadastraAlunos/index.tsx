@@ -3,7 +3,6 @@ import { Cadastro } from './styles';
 import Header from '../../conponents/Header';
 import {FormHandles} from '@unform/core';
 import api from '../../services/api';
-import { toast, ToastContainer } from 'react-toastify';
 
 
 const ListaAlunos: React.FC = () => {
@@ -16,17 +15,8 @@ const ListaAlunos: React.FC = () => {
   const handleSubmit = useCallback(()=>{
     AlunoModel.nome = (document.getElementById('nome') as HTMLInputElement).value;
     api.post('aluno/cadastro',AlunoModel);
-        
-      toast.success("Aluno Cadastrado", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-
+    
+    window.location.reload()
 
   },[])
   
@@ -73,7 +63,6 @@ const ListaAlunos: React.FC = () => {
           Cadastrar
         </button>
       </Cadastro>
-      <ToastContainer />
     </>
   )
 };
