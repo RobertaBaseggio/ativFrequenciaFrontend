@@ -72,7 +72,7 @@ export const Botoes = styled(Form)`
       background-color: #c2c2c2;
       border-radius: 10px;
       position: absolute;
-      top: 69.5vh;
+      top: 67vh;
       left: 56vw;
       cursor: pointer;
       font-size: 16px;

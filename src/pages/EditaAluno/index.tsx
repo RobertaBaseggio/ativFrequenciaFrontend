@@ -3,29 +3,63 @@ import Header from '../../conponents/Header';
 import api from '../../services/api';
 import { Edicao,Botoes } from './styles';
 import { useRouteMatch } from "react-router-dom";
-import Notificacoes from '../../conponents/Notification';
-import { MdOutlineDone } from 'react-icons/md';
+import { toast, ToastContainer } from 'react-toastify';
 
 
 interface AlunoParams{
-  id: string,
-  nome:string
+  id: string
+}
+
+interface Aluno{
+  id: number,
+  nome: string
 }
 
 const ListaAlunos: React.FC = () => {
+
+  const [alunoNome, setNome] = useState("");
   const { params } = useRouteMatch<AlunoParams>();
+
+  const [aluno, setAluno] = useState<Aluno>();
+
   const teste = {
     nome: ""
   }
 
+  useEffect(() => {
+    api.get(`/aluno/${params.id}`).then((response) => {
+      setAluno(response.data);
+    });
+  }, []);
+
   const deletar = useCallback(()=>{
         api.delete(`aluno/delete/${params.id}`);
+
+        toast.success("Aluno deletado", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
   },[])
 
   const editar = useCallback(()=>{
     teste.nome = (document.getElementById('nome') as HTMLInputElement).value;
     api.put(`aluno/editar/${params.id}`,teste);
-    window.document.location.reload()
+
+    toast.success("Aluno editado", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+
   },[])
 
   return (
@@ -38,7 +72,10 @@ const ListaAlunos: React.FC = () => {
         <label >
           Nome:
         </label>
-        <input type="text" id='nome'/> 
+          {aluno &&
+            <input type="text" id='nome' placeholder={aluno.nome}/> 
+          }
+        
         <label >
           Data de nascimento:
         </label>
@@ -76,12 +113,7 @@ const ListaAlunos: React.FC = () => {
           Deletar
         </button>
       </Botoes>
-      <Notificacoes >
-        <MdOutlineDone size={25}/>
-        <p>
-          Edição realizada
-        </p>
-      </Notificacoes>
+      <ToastContainer />
     </>
   )
 };

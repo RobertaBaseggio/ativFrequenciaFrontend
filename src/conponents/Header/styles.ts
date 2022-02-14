@@ -12,6 +12,7 @@ export const Container = styled.div`
   left: 0;
   z-index: 999;
   border-bottom: 2px solid yellowgreen;  
+  background-color: white;
 
     #img{
       margin: 15px 0 0 20px;

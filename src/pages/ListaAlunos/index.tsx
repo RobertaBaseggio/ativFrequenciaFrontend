@@ -5,10 +5,9 @@ import Header from '../../conponents/Header'
 import api from '../../services/api';
 import { BsPlusCircle } from 'react-icons/bs';
 import { FiEdit } from 'react-icons/fi';
-import { MdOutlineDone } from 'react-icons/md';
 import { Link } from 'react-router-dom';
-import Notificacoes from '../../conponents/Notification';
 import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 interface Aluno {
@@ -123,7 +122,17 @@ const ListaAlunos: React.FC<Aluno> = ({idAluno, nome}) => {
        })
 
     api.post(`/frequencia/cadastro`, frequencias);
-    window.document.location.reload()
+   
+    toast.success("Chamada salva", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    
     
   }, [frequencias, alunos])
 
@@ -202,15 +211,10 @@ const ListaAlunos: React.FC<Aluno> = ({idAluno, nome}) => {
           <button onClick={salvarPresencas}>
             Salvar
           </button>
-          <ToastContainer />
+         
         </div>
       </Botoes>
-      <Notificacoes >
-        <MdOutlineDone size={25}/>
-        <p>
-          Chamada salva
-        </p>
-      </Notificacoes>
+       <ToastContainer />
     </>
   )
 };
